@@ -1,7 +1,6 @@
 from fastapi import APIRouter
-from env.schemas.product import Product
-from .redis_cli.crud import *
-
+from poc_redis.schemas.product import Product
+from poc_redis.redis_cli.crud import get_hash, delete_hash, save_hash
 
 routes_product = APIRouter()
 db = []
