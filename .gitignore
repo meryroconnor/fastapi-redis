@@ -3,4 +3,4 @@ env/bin
 *.egg-info
 /env/*
 */__pycache__/
-*__pycache__
+*__pycache__*
