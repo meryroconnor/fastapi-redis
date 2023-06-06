@@ -20,10 +20,21 @@ def create(product: Product):
 @routes_product.get("/product/{id}")
 def get(id: str):
     try:
-        #return list(filter(lambda field: field["id"] == id, db))[0]
-        return get_hash(id)
+        # OPERATION CACHE
+        data = get_hash(key=id)
+
+        if len(data) == 0:
+            # OPERATION DB
+            product = list(filter(lambda field: field["id"] == id, fake_db))[0]
+
+            # OPERATION CACHE
+            save_hash(key=id, data=product)
+
+            return product
+        return data
     except Exception as e:
         return e
+
 
 @routes_product.delete("/delete/{id}")
 def delete(id: str):
