@@ -5,3 +5,4 @@ env/bin
 */__pycache__/
 *__pycache__*
 routes/__pycache__/products.cpython-310.pyc
+.idea
