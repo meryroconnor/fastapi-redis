@@ -25,7 +25,7 @@ def get(id: str):
 
         if len(data) == 0:
             # OPERATION DB
-            product = list(filter(lambda field: field["id"] == id, fake_db))[0]
+            product = list(filter(lambda field: field["id"] == id, db))[0]
 
             # OPERATION CACHE
             save_hash(key=id, data=product)
