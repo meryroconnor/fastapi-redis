@@ -3,7 +3,13 @@ from poc_redis.schemas.product import Product
 from poc_redis.redis_cli.crud import get_hash, delete_hash, save_hash
 
 routes_product = APIRouter()
-db = []
+db = [{
+  "id": "68c07cf6-8b4c-47c5-964c-d006b19b8d96",
+  "name": "test",
+  "price": "0.0",
+  "date": "2023-06-07 09:48:27.020456"
+}]
+
 @routes_product.post("/create", response_model=Product)
 
 def create(product: Product):
@@ -39,9 +45,10 @@ def get(id: str):
 @routes_product.delete("/delete/{id}")
 def delete(id: str):
     # OPERACION DB
-    product = list(filter(lambda field: field["id"] != id, db))
+    product = list(filter(lambda field: field["id"] == id, db))
+
     if len(product) != 0:
-        db.remove(product)
+        db.remove(product[0])
     # OPERACION CACHE
     delete_hash(key=id, keys=["id","name","price","date"])
     return {
